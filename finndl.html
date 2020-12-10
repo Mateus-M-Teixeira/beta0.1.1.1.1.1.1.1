@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style>
+		#cenario{
+			height: 100%;
+            width: 100%;
+            position: absolute;
+			margin-top: 10mm;
+		}
+
+	
+
+		#objeto{
+			
+		
+			border-radius: 100%;
+            position: absolute;
+			animation: .1s;
+
+		}
+        #p1{
+            position: absolute;
+            width: 95mm;
+			height: 95mm;
+            margin-top: 60mm;
+		
+        }
+        #p2{
+        position: absolute;
+            width: 95mm;
+			height: 95mm;
+            margin-top: 30mm;
+            margin-left: 60%;
+           
+        }
+		#barravida1{
+			background-color: yellow;
+			position: absolute;
+			background-color: red;
+			width: 40%;
+			margin-right: 40%;
+			margin-left: 5%;
+			margin-top: 1%;
+		}
+		#barravida2{
+			background-color:  springgreen;
+			position: absolute;
+			background-color: red;
+			float: right;
+			width: 40%;
+			margin-left: 50%;
+			margin-top: 1%;
+			
+		}
+		#tempo{
+			position: absolute;
+			margin: 1mm;
+			background-color:  springgreen;
+			color: red;
+			text-align: center;
+			margin-left: 45%;
+		}
+		body{
+			background-color:  purple;
+		}
+        #resultado{
+			margin-left: 40%;
+			position: absolute;
+			text-align: center;
+			margin-top: 20%;
+			background-color: springgreen;
+			color: yellow;
+		}
+		#andaresq{
+			position: absolute;
+			margin-top: 95%;
+			margin-left: 1mm;
+			margin-right: 100%;
+		}
+	</style>
+</head>
+<body>
+	
+	 <img src="jooj/arena.png" id="cenario"> <h1 id="tempo">120</h1>    <div id="barravida2">200</div>  <div id="barravida1"> 200</div> <h1 id="resultado">  </h1> <div id="objeto">    <img src="jooj/1.png" id="p1"> </div>  <div id="p2">   <img src="finndlgamer.png" id="p2">   </div>
+
+	<script>
+		let esqmbl =document.getElementById("andaresq")
+		let ganhador ;
+		let vidap1 = 200
+		let vidap2 = 200
+		let acp1 = -3 
+		let acp2 =  3
+		let object1 = document.getElementById('objeto'),
+			obj1 = new Objeto(object1, 0, 0, 0, 0, 1);
+ //8 areas de combate
+        
+		function Objeto(objeto, dirX, dirY, posX, posY, vel) {
+			this.objeto = objeto;
+			this.dirX = dirX;
+			this.dirY = dirY;
+			this.posX = posX;
+			this.posY = posY;
+			this.vel = vel;
+
+			this.getDirX = function() {
+				return this.dirX;
+			}
+
+			this.getDirY = function() {
+				return this.dirY;
+			}
+
+			this.getPosX = function() {
+				return this.posX;
+			}
+
+			this.getPosY = function() {
+				return this.posY;
+			}
+
+			this.getVel = function() {
+				return this.vel;
+			}
+
+			this.getObj = function() {
+				return this.objeto;
+			}
+
+
+			this.setDirX = function(dx) {
+				this.dirX = dx;
+			}
+
+			this.setDirY = function(dy) {
+				this.dirY = dy;
+			}
+
+			this.setPosX = function(px) {
+				this.posX = px;
+			}
+
+			this.setPosY = function(py) {
+				this.posY = py;
+			}
+
+			this.setVel = function(vel) {
+				this.vel = vel;
+			}
+
+			this.setProperty = function() {
+				return this.objeto.style;
+			}
+
+			this.setPosition = function(posX, posY) {
+
+				this.objeto.style.transform = `translate(${posX}px, ${posY}px)`;
+			}
+		}
+
+
+
+		function keyPress(e, flag) {
+			let tecla = e.keyCode;
+			switch(tecla) {
+
+				case 37: case 65: {
+
+					if(flag) {
+						obj1.setDirX(-1); 
+						acp1 = acp1 -1
+
+					} else {
+						obj1.setDirX(0);
+					}
+
+					break;
+				}
+
+				case 38: case 32: {
+
+					if(flag) {
+						obj1.setDirY(-1);
+		  
+						
+					} else {
+						obj1.setDirY(0);
+					}
+
+					break;
+				}
+
+				case 39: case 68:{
+
+					if(flag) {
+						
+						obj1.setDirX(1);
+						acp1 = acp1 +1
+					} else {
+						obj1.setDirX(0);
+					}
+
+					break;
+				}
+
+
+				
+				case 38: case 32: {
+				if(flag) {
+					ganhador = 
+					vidap2 = vidap2 - 2
+					if (vidap2 === 0) {
+						ganhador = "nocaute de jooj, jooj ganhou"
+						ss = ss - ss}
+				} else {
+					o
+				}
+
+				break;
+}
+
+			
+			}
+		}
+	
+
+		function frame() {
+			let posX = obj1.getPosX(),
+				posY = obj1.getPosY(),
+				dirX = obj1.getDirX(),
+				dirY = obj1.getDirY(),
+				vel  = obj1.getVel();
+
+			obj1.setPosX(posX + (dirX * vel));
+			obj1.setPosY(posY + (dirY * vel));
+
+			obj1.setPosition(obj1.getPosX(), obj1.getPosY());
+		}
+
+		let body = document.body;
+
+		body.addEventListener("keydown", function() {
+
+			keyPress(event, 1);
+		});
+
+		body.addEventListener("keyup", function() {
+			keyPress(event, 0);
+		});
+
+		setInterval(frame, 1);
+
+		"use strict"
+
+
+		var ss = 120;
+
+var tempo = 1000;//Quantos milésimos valem 1 segundo?
+var cron;
+
+//Inicia o temporizador
+function start() {
+    cron = setInterval(() => { timer(); }, tempo);
+}
+
+//Para o temporizador mas não limpa as variáveis
+function pause() {
+    clearInterval(cron);
+}
+
+
+
+//Faz a contagem do tempo e exibição
+function timer() {
+    ss--; //Incrementa -1 na variável ss
+
+    if (ss === 0) { //Verifica se deu 120 segundos
+      alert("acabou")
+       pause()
+	   
+    }
+	function esqmblf(acp1 , obj1 , dirX) {
+		obj1.setDirX(-1); 
+		acp1 = acp1 -1
+
+	}
+
+  esqmbl.addEventListener("click" ,esqmblf())
+   
+    
+    //Insere o valor tratado no elemento counter
+    document.getElementById('tempo').innerText = ss;
+	document.getElementById('barravida2').innerText = vidap2;
+	document.getElementById('barravida1').innerText = vidap1;
+	document.getElementById('resultado').innerText = acp1;
+
+    //Retorna o valor tratado
+    return format;
+}
+start()
+
+		</script>
+</body>
+</html>
+
+
+
+
+
+

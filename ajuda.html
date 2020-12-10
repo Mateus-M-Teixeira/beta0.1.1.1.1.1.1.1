@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+	
+
+		#objeto{
+			width: 200%;
+			height: 200%;
+		
+			border-radius: 100%;
+
+			animation: .1s;
+
+		}
+        #p1{
+            width: 200mm;
+			height: 200mm;
+		
+        }
+
+	</style>
+</head>
+<body>
+	
+	<div id="objeto" > <img src="../amigos em ruinas/pixil-frame-0 (3).png" id="p1"> <img src="../amigos em ruinas/pixil-frame-0 (2).png" id="p1"> </div>
+
+	<script>
+
+		let object1 = document.getElementById('objeto'),
+			obj1 = new Objeto(object1, 0, 0, 0, 0, 1);
+
+		function Objeto(objeto, dirX, dirY, posX, posY, vel) {
+			this.objeto = objeto;
+			this.dirX = dirX;
+			this.dirY = dirY;
+			this.posX = posX;
+			this.posY = posY;
+			this.vel = vel;
+
+			this.getDirX = function() {
+				return this.dirX;
+			}
+
+			this.getDirY = function() {
+				return this.dirY;
+			}
+
+			this.getPosX = function() {
+				return this.posX;
+			}
+
+			this.getPosY = function() {
+				return this.posY;
+			}
+
+			this.getVel = function() {
+				return this.vel;
+			}
+
+			this.getObj = function() {
+				return this.objeto;
+			}
+
+
+			this.setDirX = function(dx) {
+				this.dirX = dx;
+			}
+
+			this.setDirY = function(dy) {
+				this.dirY = dy;
+			}
+
+			this.setPosX = function(px) {
+				this.posX = px;
+			}
+
+			this.setPosY = function(py) {
+				this.posY = py;
+			}
+
+			this.setVel = function(vel) {
+				this.vel = vel;
+			}
+
+			this.setProperty = function() {
+				return this.objeto.style;
+			}
+
+			this.setPosition = function(posX, posY) {
+
+				this.objeto.style.transform = `translate(${posX}px, ${posY}px)`;
+			}
+		}
+
+		
+
+
+		function keyPress(e, flag) {
+			let tecla = e.keyCode;
+			switch(tecla) {
+
+				case 37: case 65: {
+
+					if(flag) {
+						obj1.setDirX(-1);
+					} else {
+						obj1.setDirX(0);
+					}
+
+					break;
+				}
+
+				case 38: case 87: {
+
+					if(flag) {
+						obj1.setDirY(-1);
+					} else {
+						obj1.setDirY(0);
+					}
+
+					break;
+				}
+
+				case 39: case 68:{
+
+					if(flag) {
+						obj1.setDirX(1);
+					} else {
+						obj1.setDirX(0);
+					}
+
+					break;
+				}
+
+				case 40: case 83: {
+
+					if(flag) {
+						obj1.setDirY(1);
+					} else {
+						obj1.setDirY(0);
+					}
+
+					break;
+				}
+			}
+		}
+
+		function frame() {
+			let posX = obj1.getPosX(),
+				posY = obj1.getPosY(),
+				dirX = obj1.getDirX(),
+				dirY = obj1.getDirY(),
+				vel  = obj1.getVel();
+
+			obj1.setPosX(posX + (dirX * vel));
+			obj1.setPosY(posY + (dirY * vel));
+
+			obj1.setPosition(obj1.getPosX(), obj1.getPosY());
+		}
+
+		let body = document.body;
+
+		body.addEventListener("keydown", function() {
+
+			keyPress(event, 1);
+		});
+
+		body.addEventListener("keyup", function() {
+			keyPress(event, 0);
+		});
+
+		setInterval(frame, 1);
+
+
+		</script>
+</body>
+</html>
